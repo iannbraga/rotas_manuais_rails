@@ -1,0 +1,72 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="row text-center">
+  <div class="col">
+    <h1>Transactions</h1>
+  </div>
+      <div class="col">
+        <div class="card bg-success">
+        <h4>Total Income</h4>
+        <p>R$ <%= @total_income %> </p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card bg-danger">
+        <h4>Total Expense</h4>
+        <p>R$ <%= @total_expense %> </p>
+        </div>
+      </div>
+    </div>
+
+<div id="transactions">
+    <%#= render transaction %>
+    
+    <table class="table text-center">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Description</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Type</th>
+          <th scope="col">Data</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @transactions.each do |transaction| %>
+          <tr>
+            <th scope="row"> <%= transaction.id %> </th>
+            <td> <%= transaction.description %> </td>
+            <td> <%= transaction.amount %> </td>
+            <td> <%= transaction.type_enum %> </td>
+            <td> <%= transaction.data %> </td>
+            <td> <%= link_to "Show", transaction, class: 'btn btn-primary btn-sm' %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <p>
+    </p>
+</div>
+
+<%#= link_to "New transaction", new_transaction_path %>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  New transaction
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render "form", transaction: @transaction %>
+      </div>
+    </div>
+  </div>
+</div>
